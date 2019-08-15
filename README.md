@@ -26,7 +26,7 @@ Note the --rm option to destroy the container once it is finished.
 ## Work with spark-shell
 
 ```bash
-docker exec -it spark spark-shell --master spark://spark:7077 --executor-memory 2G
+docker exec -it spark spark-shell --master spark://spark-master:7077 --executor-memory 2G
 ```
 
 Connect to the container and launch the shell.
@@ -36,7 +36,7 @@ Connect to the container and launch the shell.
 This is an example with the project hello-spark (default project included in swal4u/sbt image)
 
 ```bash
-docker exec -it spark spark-submit --master spark://spark:7077 --executor-memory 2G --class fr.stephanewalter.hello.Connexion /app/target/scala-2.11/hello-spark_2.11-0.0.1.jar
+docker exec -it spark spark-submit --master spark://spark-master:7077 --executor-memory 2G --class fr.stephanewalter.hello.Connexion /app/target/scala-2.11/hello-spark_2.11-0.0.1.jar
 ```
 
 ## Work with zeppelin

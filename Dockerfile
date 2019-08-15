@@ -3,7 +3,7 @@ FROM openjdk:8
 LABEL maintainer="Stéphane Walter <stephane.walter@me.com>"
 LABEL REFRESHED_AT="2019-08-15"
 LABEL version="Spark Master"
-LABEL features="Spark, SBT, Zeppelin"
+LABEL features="Spark, Zeppelin"
 
 # We will be running our Spark jobs as `root` user.
 USER root
@@ -60,7 +60,7 @@ RUN apt-get -yqq update && \
 ## To know the status of Zeppelin:     zeppelin-daemon.sh status
 
 # Loop to avoid to exit
-ADD bootstrap.sh /etc/master.sh
+ADD master.sh /etc/master.sh
 RUN chown root:root /etc/master.sh && \
 chmod 700 /etc/master.sh
 
@@ -79,4 +79,5 @@ EXPOSE 4040 8080 8081 7077 8090
 # Declare volume of your application
 # $PWD/app:/app
 
+WORKDIR /app
 CMD ["/etc/master.sh", "-d","2G","1"]

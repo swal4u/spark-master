@@ -5,3 +5,5 @@ app/project/target
 app/target/streams
 app/target/scala-2.11/classes
 app/target/scala-2.11/resolution-cache
+app/metastore_db
+app/spark-warehouse
