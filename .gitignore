@@ -1,0 +1,7 @@
+.DS_Store
+.bash_history
+.scala_history
+app/project/target
+app/target/streams
+app/target/scala-2.11/classes
+app/target/scala-2.11/resolution-cache
