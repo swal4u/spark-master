@@ -16,7 +16,7 @@ If you want to test a cluster with many slaves, you have to work with **spark-sl
 ## Start the container
 
 ```bash
-docker run -d --rm --net sparkCluster -p 4040:4040 -p 8080:8080 -p 8081:8081 -v $PWD:/root/ --name spark -h spark swal4u/spark-master:version-2.3.0.1
+docker run -d --rm --net sparkCluster -p 4040:4040 -p 8080:8080 -p 8081:8081 -v $PWD/app:/app --name spark -h spark swal4u/spark-master:version-2.3.0.2
 ```
 
 The master service and the slave service are started automatically.
@@ -52,13 +52,13 @@ If you want, it's possible to add more slaves.
 To avoid problem, you have to choose another name and port for the container !
 
 ```bash
-docker run -d --rm --net sparkCluster -p 8082:8081 -v $PWD:/root/ --name slave2 -h slave2 swal4u/spark-slave:version-2.3.0.1 /etc/slave.sh -d 2G 1
+docker run -d --rm --net sparkCluster -p 8082:8081 -v $PWD/app:/app --name slave2 -h slave2 swal4u/spark-slave:version-2.3.0.1 /etc/slave.sh -d 2G 1
 ```
 
 I choose to add a function in my .bash_profile (OSX).
 
 ```bash
-function slave-start () { docker run -d --rm --net sparkCluster -p "$2":8081 -v $PWD:/root/ --name "$1" -h "$1" swal4u/spark:version-2.3.0.4 /etc/slave.sh -d 2G 1 ; }
+function slave-start () { docker run -d --rm --net sparkCluster -p "$2":8081 -v $PWD/app:/app --name "$1" -h "$1" swal4u/spark-slave:version-2.3.0.1 /etc/slave.sh -d 2G 1 ; }
 ```
 
 ## Monitoring
