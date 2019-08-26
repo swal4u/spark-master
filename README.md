@@ -16,7 +16,7 @@ If you want to test a cluster with many slaves, you have to work with **spark-sl
 ## Start the container
 
 ```bash
-docker run -d --rm --net sparkCluster -p 4040:4040 -p 8080:8080 -p 8081:8081 -v $PWD/app:/app --name spark -h spark swal4u/spark-master:version-2.3.0.2
+docker run -d --rm --net sparkCluster -p 4040:4040 -p 8080:8080 -p 8081:8081 -p 8090:8090 -v $PWD:/root -v notebook:/usr/local/zeppelin/notebook -v zeppelin:/usr/local/zeppelin/conf --name spark-master -h spark-master swal4u/spark-master:v2.3.0.3'
 ```
 
 The master service and the slave service are started automatically.
@@ -33,17 +33,17 @@ Connect to the container and launch the shell.
 
 ## Work with spark-submit
 
-This is an example with the project hello-spark (default project included in swal4u/sbt image)
+This is an example with the project hello-spark (default project included in swal4u/sbt image).
+You must first go to the root directory of the project before running the spark server
 
 ```bash
-docker exec -it spark spark-submit --master spark://spark-master:7077 --executor-memory 2G --class fr.stephanewalter.hello.Connexion /app/target/scala-2.11/hello-spark_2.11-0.0.1.jar
+docker exec -it spark spark-submit --master spark://spark-master:7077 --executor-memory 2G --class fr.stephanewalter.hello.Connexion target/scala-2.11/hello-spark_2.11-0.0.1.jar
 ```
 
 ## Work with zeppelin
 
 ```bash
-docker exec -it spark bash
-zeppelin-daemon.sh start
+docker exec -it spark-master zeppelin-daemon.sh start
 ```
 
 ## Add a new worker
@@ -52,13 +52,13 @@ If you want, it's possible to add more slaves.
 To avoid problem, you have to choose another name and port for the container !
 
 ```bash
-docker run -d --rm --net sparkCluster -p 8082:8081 -v $PWD/app:/app --name slave2 -h slave2 swal4u/spark-slave:version-2.3.0.1 /etc/slave.sh -d 2G 1
+docker run -d --rm --net sparkCluster -p 8082:8081 -v $PWD:/root --name slave2 -h slave2 swal4u/spark-slave:v2.3.0.1
 ```
 
 I choose to add a function in my .bash_profile (OSX).
 
 ```bash
-function slave-start () { docker run -d --rm --net sparkCluster -p "$2":8081 -v $PWD/app:/app --name "$1" -h "$1" swal4u/spark-slave:version-2.3.0.1 /etc/slave.sh -d 2G 1 ; }
+docker run -d --rm --net sparkCluster -p "$2":8081 -v $PWD:/root --name "$1" -h "$1" swal4u/spark-slave:v2.3.0.1
 ```
 
 ## Monitoring
