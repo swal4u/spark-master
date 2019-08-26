@@ -79,5 +79,4 @@ EXPOSE 4040 8080 8081 7077 8090
 # Declare volume of your application
 # $PWD/app:/app
 
-WORKDIR /app
 CMD ["/etc/master.sh", "-d","2G","1"]
