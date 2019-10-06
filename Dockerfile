@@ -1,9 +1,9 @@
 FROM openjdk:8
 
 LABEL maintainer="Stéphane Walter <stephane.walter@me.com>"
-LABEL REFRESHED_AT="2019-08-15"
+LABEL REFRESHED_AT="2019-10-06"
 LABEL version="Spark Master"
-LABEL features="Spark, Zeppelin"
+LABEL features="Spark, Zeppelin, Delta"
 
 # We will be running our Spark jobs as `root` user.
 USER root
@@ -12,15 +12,15 @@ USER root
 WORKDIR /root/
 
 # Spark related variables.
-ARG SPARK_VERSION=2.3.0
+ARG SPARK_VERSION=2.4.4
 ARG SPARK_BINARY_ARCHIVE_NAME=spark-${SPARK_VERSION}-bin-hadoop2.7
 #ARG SPARK_BINARY_DOWNLOAD_URL=http://apache.cs.uu.nl/spark/spark-${SPARK_VERSION}/${SPARK_BINARY_ARCHIVE_NAME}.tgz
 ARG SPARK_BINARY_DOWNLOAD_URL=https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/${SPARK_BINARY_ARCHIVE_NAME}.tgz
 
 # Zeppelin related variables.
-ARG ZEPPELIN_VERSION="v0.8.0"
-ARG ZEPPELIN_BINARY_DOWNLOAD_URL=http://apache.crihan.fr/dist/zeppelin/zeppelin-0.8.0/zeppelin-0.8.0-bin-all.tgz
-ARG ZEPPELIN_BINARY_ARCHIVE_NAME=zeppelin-0.8.0-bin-all
+ARG ZEPPELIN_VERSION="v0.8.2"
+ARG ZEPPELIN_BINARY_DOWNLOAD_URL=http://apache.crihan.fr/dist/zeppelin/zeppelin-0.8.2/zeppelin-0.8.2-bin-all.tgz
+ARG ZEPPELIN_BINARY_ARCHIVE_NAME=zeppelin-0.8.2-bin-all
 
 ENV SPARK_HIVE true
 ENV ZEPPELIN_PORT 8090
