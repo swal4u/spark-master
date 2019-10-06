@@ -7,3 +7,5 @@ app/target/scala-2.11/classes
 app/target/scala-2.11/resolution-cache
 app/metastore_db
 app/spark-warehouse
+.ivy2/cache
+.ivy2/jars
