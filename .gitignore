@@ -9,3 +9,4 @@ app/metastore_db
 app/spark-warehouse
 .ivy2/cache
 .ivy2/jars
+.metals

@@ -12,7 +12,7 @@ USER root
 WORKDIR /root/
 
 # Spark related variables.
-ARG SPARK_VERSION=2.4.4
+ARG SPARK_VERSION=2.4.2
 ARG SPARK_BINARY_ARCHIVE_NAME=spark-${SPARK_VERSION}-bin-hadoop2.7
 #ARG SPARK_BINARY_DOWNLOAD_URL=http://apache.cs.uu.nl/spark/spark-${SPARK_VERSION}/${SPARK_BINARY_ARCHIVE_NAME}.tgz
 ARG SPARK_BINARY_DOWNLOAD_URL=https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/${SPARK_BINARY_ARCHIVE_NAME}.tgz
