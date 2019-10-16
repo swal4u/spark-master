@@ -13,6 +13,12 @@ The Zeppelin service is not launched by default.
 
 If you want to test a cluster with many slaves, you have to work with **spark-slave** image.
 
+## Create specific network
+
+```bash
+docker network create sparkCluster
+```
+
 ## Start the container
 
 ```bash
