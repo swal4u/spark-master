@@ -22,7 +22,7 @@ docker network create sparkCluster
 ## Start the container
 
 ```bash
-docker run -d --rm --net sparkCluster -p 4040:4040 -p 8080:8080 -p 8081:8081 -p 8090:8090 -v $PWD:/root -v notebook:/usr/local/zeppelin/notebook -v zeppelin:/usr/local/zeppelin/conf --name spark-master -h spark-master swal4u/spark-master:v2.4.2.1'
+docker run -d --rm --net sparkCluster -p 4040:4040 -p 8080:8080 -p 8081:8081 -p 8090:8090 -v $PWD:/root -v notebook:/usr/local/zeppelin/notebook -v zeppelin:/usr/local/zeppelin/conf --name spark-master -h spark-master swal4u/spark-master:v2.4.2.1
 ```
 
 The master service and the slave service are started automatically.
@@ -32,7 +32,7 @@ Note the --rm option to destroy the container once it is finished.
 ## Work with spark-shell
 
 ```bash
-docker exec -it spark spark-shell --master spark://spark-master:7077 --executor-memory 2G
+docker exec -it spark-master spark-shell --master spark://spark-master:7077 --executor-memory 2G
 ```
 
 Connect to the container and launch the shell.
@@ -43,7 +43,7 @@ This is an example with the project hello-spark (default project included in swa
 You must first go to the root directory of the project before running the spark server
 
 ```bash
-docker exec -it spark spark-submit --master spark://spark-master:7077 --executor-memory 2G --class fr.stephanewalter.hello.Connexion target/scala-2.12/hello-spark_2.12-0.0.1.jar
+docker exec -it spark-master spark-submit --master spark://spark-master:7077 --executor-memory 2G --class fr.stephanewalter.hello.Connexion target/scala-2.12/hello-spark_2.12-0.0.1.jar
 ```
 
 ## Work with zeppelin
