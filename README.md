@@ -22,7 +22,7 @@ docker network create sparkCluster
 ## Start the container
 
 ```bash
-docker run -d --rm --net sparkCluster -p 4040:4040 -p 8080:8080 -p 8081:8081 -p 8090:8090 -v $PWD:/root -v notebook:/usr/local/zeppelin/notebook -v zeppelin:/usr/local/zeppelin/conf --name spark-master -h spark-master swal4u/spark-master:v2.4.2.1
+docker run -d --rm --net sparkCluster -p 4040:4040 -p 8080:8080 -p 8081:8081 -p 8090:8090 -v $PWD:/root -v notebook:/usr/local/zeppelin/notebook -v zeppelin:/usr/local/zeppelin/conf --name spark-master -h spark-master swal4u/spark-master:v2.4.2.2
 ```
 
 The master service and the slave service are started automatically.
