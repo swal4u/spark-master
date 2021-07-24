@@ -4,7 +4,6 @@
 /usr/local/spark/sbin/start-master.sh
 /usr/local/spark/sbin/start-slave.sh spark://$HOSTNAME:7077 -m $2 -c $3
 
-
 # Boucle sans fin
 if [[ $1 == "-d" ]]; then
   while true; do sleep 1000; done

@@ -5,13 +5,8 @@
 This image contains the following software:
 
 - Spark
-- Zeppelin
 
-You could use only this image to work on Spark.
 When you run this image, the container starts the master service and one slave service.
-The Zeppelin service is not launched by default.
-
-If you want to test a cluster with many slaves, you have to work with **spark-slave** image.
 
 ## Create specific network
 
@@ -22,7 +17,7 @@ docker network create sparkCluster
 ## Start the container
 
 ```bash
-docker run -d --rm --net sparkCluster -p 4040:4040 -p 8080:8080 -p 8081:8081 -p 8090:8090 -v $PWD:/app -v notebook:/usr/local/zeppelin/notebook -v zeppelin:/usr/local/zeppelin/conf --name spark-master -h spark-master swal4u/spark-master:v2.4.2.2
+docker run -d --rm --net sparkCluster -p 4040:4040 -p 8080:8080 -p 8081:8081 -v $PWD:/app --name spark-master -h spark-master swal4u/spark-master:v2.3.0.4
 ```
 
 The master service and the slave service are started automatically.
@@ -43,13 +38,15 @@ This is an example with the project hello-spark (default project included in swa
 You must first go to the root directory of the project before running the spark server
 
 ```bash
-docker exec -it spark-master spark-submit --master spark://spark-master:7077 --executor-memory 2G --class fr.stephanewalter.hello.Connexion target/scala-2.12/hello-spark_2.12-0.0.1.jar
+docker exec -it spark-master spark-submit --master spark://spark-master:7077 --executor-memory 2G --class fr.stephanewalter.hello.Connexion target/scala-2.12/hello-spark_2.11-0.0.1.jar
 ```
 
 ## Work with zeppelin
 
+If you want to use Zeppelin with Spark, you could use only the zeppelin container with built-in spark.
+
 ```bash
-docker exec -it spark-master zeppelin-daemon.sh start
+docker run -p 8090:8080 --rm -v logs:/logs -v notebook:/notebook -e ZEPPELIN_LOG_DIR=/logs -e ZEPPELIN_NOTEBOOK_DIR=/notebook --name zeppelin apache/zeppelin:0.9.0
 ```
 
 ## Add a new worker
@@ -94,3 +91,9 @@ git push --tags
 ```
 
 Docker Hub detects a new version and build the container automatically.
+
+## Zeppelin
+
+docker run -p 8090:8080 --rm -v $PWD/logs:/logs -v $PWD/notebook:/notebook \
+           -e ZEPPELIN_LOG_DIR='/logs' -e ZEPPELIN_NOTEBOOK_DIR='/notebook' \
+           --name zeppelin apache/zeppelin:0.9.0
