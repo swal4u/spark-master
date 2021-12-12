@@ -97,3 +97,11 @@ Docker Hub detects a new version and build the container automatically.
 docker run -p 8090:8080 --rm -v $PWD/logs:/logs -v $PWD/notebook:/notebook \
            -e ZEPPELIN_LOG_DIR='/logs' -e ZEPPELIN_NOTEBOOK_DIR='/notebook' \
            --name zeppelin apache/zeppelin:0.9.0
+
+## Build image
+
+````bash
+docker build -t swal4u/spark-master:v2.3.0.4 \
+  --build-arg USER_ID=$(id -u) \
+  --build-arg GROUP_ID=$(id -g) .
+````
