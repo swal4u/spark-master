@@ -100,8 +100,21 @@ docker run -p 8090:8080 --rm -v $PWD/logs:/logs -v $PWD/notebook:/notebook \
 
 ## Build image
 
+### Docker-desktop in OSX
+
 ````bash
 docker build -t swal4u/spark-master:v2.3.0.4 \
   --build-arg USER_ID=$(id -u) \
   --build-arg GROUP_ID=$(id -g) .
 ````
+
+### Minikube
+
+As Minikube is a VM with a specific user (1000:1000), you have to force user and group to have right access on files.
+
+````bash
+docker build -t swal4u/spark-master:v2.3.0.4 \
+  --build-arg USER_ID=1000 \
+  --build-arg GROUP_ID=1000 .
+````
+
